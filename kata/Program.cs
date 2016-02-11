@@ -19,5 +19,31 @@ namespace kata
                 return false;
             return true;   
         }
+        /// http://www.codewars.com/kata/56af1a20509ce5b9b000001e/train/csharp
+        ///
+        public static string Travel(string r, string zipcode) 
+        {
+            var key = zipcode;
+            var street = string.Empty;
+			var door  = string.Empty;
+            
+            var address = r.Split (new [] { ',' })
+                .Select (f => f.Split(new [] {" "},StringSplitOptions.None))
+				.Select (x => new {Door = x.First(), 
+					Street = x.Skip(1).Take(x.Count() - 3).Aggregate((i, j) => i + " " + j), 
+					StateZip = x.Skip(x.Count() -2).Take(2).Aggregate((i, j) => i + " " + j)})
+                    .Where (x => x.StateZip == key);
+			
+      
+			foreach	(var item in address)
+			{
+				street += item.Street + ",";
+				door += item.Door + ",";
+			}
+            
+			return string.Format ("{0}:{1}/{2}", key, street.Trim (new [] { ',' }), door.Trim (new [] { ',' }));
+        }
+
+
     }
 }
