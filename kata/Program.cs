@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace kata
@@ -33,7 +32,6 @@ namespace kata
 					Street = x.Skip(1).Take(x.Count() - 3).Aggregate((i, j) => i + " " + j), 
 					StateZip = x.Skip(x.Count() -2).Take(2).Aggregate((i, j) => i + " " + j)})
                     .Where (x => x.StateZip == key);
-			
       
 			foreach	(var item in address)
 			{
@@ -43,7 +41,5 @@ namespace kata
             
 			return string.Format ("{0}:{1}/{2}", key, street.Trim (new [] { ',' }), door.Trim (new [] { ',' }));
         }
-
-
     }
 }
